@@ -13,5 +13,6 @@ class ListTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var myBtn: UIButton!
     
 }
