@@ -11,6 +11,7 @@ class LottoViewController: UIViewController {
     
     
     @IBOutlet weak var numberTextField: UITextField!
+    
 //    @IBOutlet weak var lottoPickerView: UIPickerView!
     
     var lottoPickerView = UIPickerView()
@@ -29,6 +30,7 @@ class LottoViewController: UIViewController {
         
         lottoPickerView.dataSource = self
         lottoPickerView.delegate = self
+        numberTextField.delegate = self
         
     }
     
@@ -51,4 +53,23 @@ extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return "\(numberList[row])회차"
     }
     
+}
+//
+//class CustomUITextField: UITextField {
+//   override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+//        if action == #selector(UIResponderStandardEditActions.paste(_:)) || action == #selector(UIResponderStandardEditActions.copy(_:)){
+//            return false
+//        }
+//        return super.canPerformAction(action, withSender: sender)
+//   }
+//}
+
+extension LottoViewController: UITextFieldDelegate {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        numberTextField.isUserInteractionEnabled = false
+        return true
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        numberTextField.isUserInteractionEnabled = true
+    }
 }

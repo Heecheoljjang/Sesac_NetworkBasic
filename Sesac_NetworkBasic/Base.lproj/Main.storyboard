@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="bc9-hH-2Uj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4jA-Yu-Opu">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -36,7 +36,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-154" y="123"/>
+            <point key="canvasLocation" x="-362" y="171"/>
         </scene>
         <!--Lotto View Controller-->
         <scene sceneID="8AU-VU-JwO">
@@ -48,6 +48,9 @@
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="uj5-bd-zK4">
                                 <rect key="frame" x="20" y="64" width="374" height="50"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="gTV-tP-5MG"/>
                                 </constraints>
@@ -113,7 +116,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="numberTextField" destination="uj5-bd-zK4" id="ixy-vG-wBJ"/>
+                        <outlet property="numberTextField" destination="uj5-bd-zK4" id="Fgi-h2-aaD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JgV-0a-65t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -159,12 +162,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mR4-bI-fbj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1614" y="134"/>
+            <point key="canvasLocation" x="1371" y="134"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="NlH-C8-pFf">
+            <objects>
+                <viewController storyboardIdentifier="ViewController" id="4jA-Yu-Opu" customClass="ViewController" customModule="Sesac_NetworkBasic" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cjm-h1-JX0">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4h-4C-KFb">
+                                <rect key="frame" x="173.5" y="432.5" width="67" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="tapBtn:" destination="4jA-Yu-Opu" eventType="touchUpInside" id="d94-uD-dEl"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="roK-KS-pP2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="e4h-4C-KFb" firstAttribute="centerX" secondItem="cjm-h1-JX0" secondAttribute="centerX" id="J1l-zQ-Esv"/>
+                            <constraint firstItem="e4h-4C-KFb" firstAttribute="centerY" secondItem="cjm-h1-JX0" secondAttribute="centerY" id="ekA-CX-IL8"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="qO3-Z0-cLx"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NIT-7z-Gaf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3439.130434782609" y="133.92857142857142"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="7Wl-NO-RPa">
             <objects>
-                <viewController id="bc9-hH-2Uj" customClass="WebViewController" customModule="Sesac_NetworkBasic" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewController" id="bc9-hH-2Uj" customClass="WebViewController" customModule="Sesac_NetworkBasic" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cxo-g0-2pP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -182,9 +215,29 @@
                                     <constraint firstAttribute="height" constant="44" id="Lbl-V4-H3C"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Item" id="ij5-Cc-5Bd"/>
+                                    <barButtonItem title="Item" id="ij5-Cc-5Bd">
+                                        <connections>
+                                            <action selector="tapCloseBtn:" destination="bc9-hH-2Uj" id="iHP-Sm-SKe"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ylS-qD-Fg7"/>
+                                    <barButtonItem title="Item" id="OXR-dc-UXK">
+                                        <connections>
+                                            <action selector="tapReloadBtn:" destination="bc9-hH-2Uj" id="T0g-4O-hrh"/>
+                                        </connections>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="pME-Wj-f64"/>
-                                    <barButtonItem title="Item" id="8tE-lG-1zT"/>
+                                    <barButtonItem title="Item" id="tCD-aq-a1N">
+                                        <connections>
+                                            <action selector="tapGoBackBtn:" destination="bc9-hH-2Uj" id="hM6-lf-c01"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="bek-5z-qbF"/>
+                                    <barButtonItem title="Item" id="8tE-lG-1zT">
+                                        <connections>
+                                            <action selector="tapGoForwardBtn:" destination="bc9-hH-2Uj" id="Dga-uw-XPn"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GUt-gn-lC3">
@@ -212,13 +265,17 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="closeBtn" destination="ij5-Cc-5Bd" id="AH8-mD-Pfl"/>
+                        <outlet property="goBackBtn" destination="tCD-aq-a1N" id="BBx-Qn-hqA"/>
+                        <outlet property="goForwardBtn" destination="8tE-lG-1zT" id="Ujh-VV-93x"/>
+                        <outlet property="reloadBtn" destination="OXR-dc-UXK" id="V8e-5Q-1cY"/>
                         <outlet property="searchBar" destination="h6P-Vt-I6E" id="K7a-Pv-gUm"/>
                         <outlet property="webView" destination="GUt-gn-lC3" id="CLJ-rR-Fhb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eFX-TQ-abQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2321" y="135"/>
+            <point key="canvasLocation" x="4176.811594202899" y="133.92857142857142"/>
         </scene>
     </scenes>
     <resources>

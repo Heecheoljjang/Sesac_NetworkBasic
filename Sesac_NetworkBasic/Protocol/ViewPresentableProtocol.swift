@@ -12,6 +12,7 @@ import UIKit
 // 만약 get만 명시했다면, get기능만 최소한 구현되어 있으면 된다. 그래서 필요하다면 set도 구현해도 괜찮음.
 // get으로 쓴다면 변경불가능하게 let으로 선언가능
 // set까지 썼다면 let으로 사용불가능
+
 @objc protocol ViewPresentableProtocol {
     
     var navigationTitleString: String { get set }
