@@ -8,9 +8,13 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        UserDefaultsHelper.shared.nickname = "고래밥"
+        
+        title = UserDefaultsHelper.shared.nickname
 
     }
     @IBAction func tapBtn(_ sender: UIButton) {

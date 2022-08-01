@@ -50,7 +50,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         //테이블뷰가 사용할 테이블뷰셀 등록(XIB를 사용할떄 작성)
         //xib: xml interface builder <= 예전에는 Nib사용
-        searchTableView.register(UINib(nibName: ListTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: ListTableViewCell.identifier)
+        searchTableView.register(UINib(nibName: ListTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: ListTableViewCell.identifier)
         
     }
 //    func configureView() {

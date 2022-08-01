@@ -26,7 +26,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
     }
 
+    // 앱이 액티브상태가 되었을떄
     func sceneDidBecomeActive(_ scene: UIScene) {
+        
+        //뱃지 제거
+        UIApplication.shared.applicationIconBadgeNumber = 0
+        
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
     }

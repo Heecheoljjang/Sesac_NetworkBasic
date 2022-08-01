@@ -21,6 +21,18 @@ class TranslateViewController: UIViewController {
         userInputTextView.text = textViewPlaceholderText
         userInputTextView.textColor = .lightGray
         
+        userInputTextView.font = .boldSystemFont(ofSize: 20)
+        
+//        userInputTextView.dataDetectorTypes = .calendarEvent
+//        userInputTextView.text = "07/30/2022"
+//        userInputTextView.isEditable = false
+        
+        let attributedString = NSMutableAttributedString(string: "안녕")
+        let attachment = NSTextAttachment(image: UIImage(named: "겨울왕국2")!)
+        attachment.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
+        attributedString.append(NSAttributedString(attachment: attachment))
+        userInputTextView.attributedText = attributedString
+        
     }
 }
 extension TranslateViewController: UITextViewDelegate {

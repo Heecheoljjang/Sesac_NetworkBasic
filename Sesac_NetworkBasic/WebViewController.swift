@@ -10,6 +10,7 @@ import WebKit
 
 class WebViewController: UIViewController {
     
+    
     static let identity = "WebViewController"
 
     @IBOutlet weak var searchBar: UISearchBar!
