@@ -12,10 +12,15 @@ protocol ReusableViewProtocol {
     static var reuseIdentifier: String { get }
 }
 
+//extension UIViewController: ReusableViewProtocol {
+//
+//    static var reuseIdentifier: String {
+//            return String(describing: self)
+//    }
+//}
 extension UIViewController: ReusableViewProtocol {
-    
     static var reuseIdentifier: String {
-            return String(describing: self)
+        return String(describing: self)
     }
 }
 
@@ -25,4 +30,11 @@ extension UITableViewCell: ReusableViewProtocol {
         return String(describing: self)
     }
     
+}
+
+struct Hee {
+    private init() {
+        
+    }
+    static var identifier: String = "123"
 }

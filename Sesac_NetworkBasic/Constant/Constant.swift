@@ -6,6 +6,20 @@
 //
 
 import Foundation
+
+struct APIKey {
+    static let BOXOFFICE = "e5ec1411ff0903bf129599d208aff1c1"
+    static let NAVER_ID = "JPn2BexzHtawtjBLviCv"
+    static let NAVER_SECRET = "z4H3ty26JR"
+    static let OPENWEATHER = "4af5cb37399a98438645cb803764aa97"
+}
+
+struct EndPoint {
+    static let boxOfficeURL = "http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?"
+    static let lottoURL = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber"
+    static let translateURL = "https://openapi.naver.com/v1/papago/n2mt"
+}
+
 //
 //enum StoryboardName {
 //    case Main

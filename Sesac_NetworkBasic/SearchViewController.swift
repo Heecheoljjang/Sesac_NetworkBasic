@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 /*
  Swift Protocol
@@ -18,28 +20,23 @@ import UIKit
  
  */
 
+/*
+ 각 json value -> list -> tableview 갱신
+ 서버의 응답이 몇개인지 모를땐?
+ */
+
 struct MyCell {
     var labelText: String
     var check: Bool = false
 }
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-//    var navigationTitleString: String = ""
-//
-//    var backgroundColor: UIColor
-//
-//    static var identifier: String
-//
-    
     
 
     @IBOutlet weak var searchTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     
-    var myList = [MyCell(labelText: "바보"), MyCell(labelText: "1"), MyCell(labelText: "2"), MyCell(labelText: "3"), MyCell(labelText: "4"), MyCell(labelText: "5"), MyCell(labelText: "6"), MyCell(labelText: "7"), MyCell(labelText: "8"), MyCell(labelText: "바보"), MyCell(labelText: "바보"), MyCell(labelText: "바보"), MyCell(labelText: "바보"), MyCell(labelText: "9"), MyCell(labelText: "10"), MyCell(labelText: "11"), MyCell(labelText: "12"), MyCell(labelText: "13"), MyCell(labelText: "14"), MyCell(labelText: "15"), MyCell(labelText: "16"), MyCell(labelText: "17"), MyCell(labelText: "바보"), MyCell(labelText: "바보"), MyCell(labelText: "바보"), MyCell(labelText: "바보"), MyCell(labelText: "바보"), MyCell(labelText: "18"), MyCell(labelText: "19"), MyCell(labelText: "20"), MyCell(labelText: "21"), MyCell(labelText: "22"), MyCell(labelText: "23"), MyCell(labelText: "24"), MyCell(labelText: "25")] {
-        didSet {
-            searchTableView.reloadData()
-        }
-    }
+    var list: [BoxOfficeModel] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,42 +49,67 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //xib: xml interface builder <= 예전에는 Nib사용
         searchTableView.register(UINib(nibName: ListTableViewCell.reuseIdentifier, bundle: nil), forCellReuseIdentifier: ListTableViewCell.identifier)
         
-    }
-//    func configureView() {
-//        searchTableView.backgroundColor = .clear
-//        searchTableView.separatorColor = .clear
-//        searchTableView.rowHeight = 60
-//    }
-    
-    func configureLabel() {
+        searchBar.delegate = self
         
+        requestBoxOffice(text: "20220701")
+    }
+
+    func requestBoxOffice(text: String) {
+        
+        list.removeAll()
+    
+        let url = "\(EndPoint.boxOfficeURL)key=\(APIKey.BOXOFFICE)&targetDT=20220202"
+        AF.request(url, method: .get).validate().responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                print(json)
+                
+                for movie in json["boxOfficeResult"]["dailyBoxOfficeList"].arrayValue {
+                    let movieNm = movie["movieNm"].stringValue
+                    let openDt = movie["openDt"].stringValue
+                    let audiAcc = movie["audiAcc"].stringValue
+                    
+                    let data = BoxOfficeModel(movieTitle: movieNm, releaseDate: openDt, totalCount: audiAcc)
+                    
+                    
+                    self.list.append(data)
+                }
+                
+                self.searchTableView.reloadData()
+                print(self.list)
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myList.count
+        return list.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell() }
         
-        cell.titleLabel.text = "HI"
+        cell.titleLabel.text = "\(list[indexPath.row].movieTitle): \(list[indexPath.row].releaseDate)"
         cell.titleLabel.font = .boldSystemFont(ofSize: 22)
-        cell.myBtn.tag = indexPath.row // 태그를 이용해서 리스트 위치를 알아낼 것이기때문에 필요
         
-        cell.myBtn.addTarget(self, action: #selector(tapHeartBtn), for: .touchUpInside)
         
-        let img = myList[indexPath.row].check ? "heart.fill" : "heart"
-        cell.myBtn.setImage(UIImage(systemName: img), for: .normal)
         
         return cell
     }
     @objc func tapHeartBtn(sender: UIButton) {
         // check가 true면 꽉찬하트, false면 빈 하트
         // 여기서는 값만 바꿔주고, 뷰와 관련된 것은 cellForRowAt에서 하기
-        myList[sender.tag].check = !myList[sender.tag].check
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(100)
+        return CGFloat(60)
     }
 
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        requestBoxOffice(text: searchBar.text!) // 옵셔널 바인딩, 8글자, 숫자, 날짜로 변경 시 유효한 형태의 값인지 등
+    }
 }

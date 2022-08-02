@@ -7,9 +7,13 @@
 
 import UIKit
 
+import Alamofire
+import SwiftyJSON
+
 class TranslateViewController: UIViewController {
     
     @IBOutlet weak var userInputTextView: UITextView!
+    @IBOutlet weak var resultTextView: UITextView!
     
     let textViewPlaceholderText = "번역하고 싶은 문장을 작성해보세요."
     
@@ -22,17 +26,43 @@ class TranslateViewController: UIViewController {
         userInputTextView.textColor = .lightGray
         
         userInputTextView.font = .boldSystemFont(ofSize: 20)
+
         
-//        userInputTextView.dataDetectorTypes = .calendarEvent
-//        userInputTextView.text = "07/30/2022"
-//        userInputTextView.isEditable = false
+        //requestTranslatedData(text: userInputTextView.text)
+        resultTextView.text = ""
         
-        let attributedString = NSMutableAttributedString(string: "안녕")
-        let attachment = NSTextAttachment(image: UIImage(named: "겨울왕국2")!)
-        attachment.bounds = CGRect(x: 0, y: 0, width: 20, height: 20)
-        attributedString.append(NSAttributedString(attachment: attachment))
-        userInputTextView.attributedText = attributedString
+    }
+    
+    func requestTranslatedData(text: String) {
+        let url = EndPoint.translateURL
         
+        let parameter = ["source": "ko", "target": "en", "text": text]
+        
+        // 타입 어노테이션해야함 String: STring으로 돼있음. 그리고 HTTPHeader로쓴느거 조심
+        let header: HTTPHeaders = ["X-Naver-Client-Id": APIKey.NAVER_ID, "X-Naver-Client-Secret": APIKey.NAVER_SECRET]
+        
+        
+        AF.request(url, method: .post, parameters: parameter, headers: header).validate(statusCode: 200..<400).responseJSON { response in
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
+                print(json)
+                
+                let statusCode = response.response?.statusCode ?? 500
+                
+                if statusCode == 200 {
+                    self.resultTextView.text = json["message"]["result"]["translatedText"].stringValue
+                } else {
+                    self.userInputTextView.text = json["errorMessage"].stringValue
+                }
+                
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    @IBAction func tapTranslateButton(_ sender: UIButton) {
+        requestTranslatedData(text: userInputTextView.text!)
     }
 }
 extension TranslateViewController: UITextViewDelegate {

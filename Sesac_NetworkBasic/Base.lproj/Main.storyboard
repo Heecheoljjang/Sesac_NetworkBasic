@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Jtm-KE-xRr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ScK-VD-qgZ">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
@@ -17,26 +17,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="mDT-76-off">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Nvv-rx-puk">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="bEe-q3-Y2T"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="mDT-76-off" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="1fJ-bY-jaJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mDT-76-off" secondAttribute="trailing" id="4Uq-Id-BaO"/>
+                            <constraint firstItem="Nvv-rx-puk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="S8t-Ig-Qyq"/>
+                            <constraint firstItem="mDT-76-off" firstAttribute="top" secondItem="Nvv-rx-puk" secondAttribute="bottom" id="dzA-MF-SOU"/>
+                            <constraint firstItem="Nvv-rx-puk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="fnz-Ul-VR9"/>
+                            <constraint firstItem="Nvv-rx-puk" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="hnc-si-614"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mDT-76-off" secondAttribute="bottom" id="oHb-2L-I9d"/>
                             <constraint firstItem="mDT-76-off" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xqZ-Ml-kok"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchBar" destination="Nvv-rx-puk" id="NxL-ca-vaN"/>
                         <outlet property="searchTableView" destination="mDT-76-off" id="dxz-0z-sAb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-362" y="171"/>
+            <point key="canvasLocation" x="-362.31884057971018" y="170.75892857142856"/>
         </scene>
         <!--Location View Controller-->
         <scene sceneID="IBC-Dw-LcS">
@@ -242,22 +253,43 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q8H-Of-D6l">
-                                <rect key="frame" x="169" y="601" width="97" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ktn-SE-SO0">
+                                <rect key="frame" x="20" y="365" width="414" height="200"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="gNs-XI-Txw"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ykw-pz-dMB">
+                                <rect key="frame" x="167" y="314" width="80" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="z73-c2-Avu"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="번역하기"/>
+                                <connections>
+                                    <action selector="tapTranslateButton:" destination="ScK-VD-qgZ" eventType="touchUpInside" id="PgD-jg-gWD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="diM-tS-MS2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Ktn-SE-SO0" firstAttribute="trailing" secondItem="diM-tS-MS2" secondAttribute="trailing" constant="20" id="0fC-yu-BlT"/>
                             <constraint firstItem="tHF-D5-WHc" firstAttribute="leading" secondItem="diM-tS-MS2" secondAttribute="leading" constant="20" id="Al1-yv-T0A"/>
+                            <constraint firstItem="Ykw-pz-dMB" firstAttribute="top" secondItem="tHF-D5-WHc" secondAttribute="bottom" constant="20" id="Bu6-jT-7Db"/>
+                            <constraint firstItem="Ktn-SE-SO0" firstAttribute="top" secondItem="Ykw-pz-dMB" secondAttribute="bottom" constant="20" id="PAO-Vc-kqQ"/>
+                            <constraint firstItem="Ktn-SE-SO0" firstAttribute="leading" secondItem="diM-tS-MS2" secondAttribute="leading" constant="20" id="SiQ-03-Hlc"/>
                             <constraint firstItem="diM-tS-MS2" firstAttribute="trailing" secondItem="tHF-D5-WHc" secondAttribute="trailing" constant="20" id="UvL-EG-uCw"/>
                             <constraint firstItem="tHF-D5-WHc" firstAttribute="top" secondItem="diM-tS-MS2" secondAttribute="top" constant="50" id="VXT-wm-X8B"/>
+                            <constraint firstItem="Ykw-pz-dMB" firstAttribute="centerX" secondItem="6eG-9j-Cgl" secondAttribute="centerX" id="x8f-Fh-DhM"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="resultTextView" destination="Ktn-SE-SO0" id="yYn-Dx-8pU"/>
                         <outlet property="userInputTextView" destination="tHF-D5-WHc" id="zh2-rI-C3Y"/>
                     </connections>
                 </viewController>

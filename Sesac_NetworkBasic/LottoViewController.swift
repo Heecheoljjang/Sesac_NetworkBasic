@@ -69,16 +69,16 @@ extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 
     func requestLotto(number: Int) {
     
-        let url = "https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo=\(number)"
+        let url = "\(EndPoint.lottoURL)&drwNo=\(number)"
         AF.request(url, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
                 let json = JSON(value)
-        
+                print(json)
                 for i in 0...5 {
                     self.numberLabel[i].text = json["drwtNo\(i+1)"].stringValue
                 }
-                self.bonusNumLabel.text = json["bnusNo"].stringValue
+                self.bonusNumLabel.text = json["bnusNo"].stringValue 
                 
                 let date = json["drwNoDate"].stringValue
                 let round = json["drwNo"].intValue

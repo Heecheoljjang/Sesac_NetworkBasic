@@ -16,34 +16,32 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="185"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Xa-t6-gus">
-                        <rect key="frame" x="101.5" y="82" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Xa-t6-gus">
+                        <rect key="frame" x="221" y="82" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQs-Js-6sm">
-                        <rect key="frame" x="24" y="77" width="45.5" height="31"/>
-                        <state key="normal" title="Button"/>
-                        <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
-                    </button>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xoR-v9-d6s">
+                        <rect key="frame" x="20" y="8" width="112.5" height="169"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="xoR-v9-d6s" secondAttribute="height" multiplier="1:1.5" id="Vah-Iu-mab"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="dQs-Js-6sm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="2FZ-6J-S1u"/>
-                    <constraint firstItem="9Xa-t6-gus" firstAttribute="leading" secondItem="dQs-Js-6sm" secondAttribute="trailing" constant="32" id="MHl-JS-9hg"/>
+                    <constraint firstItem="xoR-v9-d6s" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="06s-11-ygj"/>
+                    <constraint firstAttribute="bottom" secondItem="xoR-v9-d6s" secondAttribute="bottom" constant="8" id="AXZ-Tr-pg0"/>
                     <constraint firstItem="9Xa-t6-gus" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Mfp-bO-yN9"/>
-                    <constraint firstItem="dQs-Js-6sm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dKu-ve-XhS"/>
+                    <constraint firstItem="xoR-v9-d6s" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="bCS-Ut-X6J"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="9Xa-t6-gus" secondAttribute="trailing" constant="8" id="jD1-Nr-NKX"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="myBtn" destination="dQs-Js-6sm" id="pZU-51-zpp"/>
                 <outlet property="titleLabel" destination="9Xa-t6-gus" id="Vi8-e4-SqT"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="183.14732142857142"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="heart" catalog="system" width="128" height="109"/>
-    </resources>
 </document>
