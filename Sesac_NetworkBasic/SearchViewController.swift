@@ -36,6 +36,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var searchTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    
     var list: [BoxOfficeModel] = []
     
     override func viewDidLoad() {
@@ -58,7 +59,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         list.removeAll()
     
-        let url = "\(EndPoint.boxOfficeURL)key=\(APIKey.BOXOFFICE)&targetDT=20220202"
+
+        let url = "\(EndPoint.boxOfficeURL)key=\(APIKey.BOXOFFICE)&targetDt=\(text)"
+       
         AF.request(url, method: .get).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -69,15 +72,15 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     let movieNm = movie["movieNm"].stringValue
                     let openDt = movie["openDt"].stringValue
                     let audiAcc = movie["audiAcc"].stringValue
-                    
-                    let data = BoxOfficeModel(movieTitle: movieNm, releaseDate: openDt, totalCount: audiAcc)
-                    
-                    
+                    let rank = movie["rank"].stringValue
+
+                    let data = BoxOfficeModel(movieTitle: movieNm, releaseDate: openDt, totalCount: audiAcc, rank: rank)
+
+
                     self.list.append(data)
                 }
-                
+
                 self.searchTableView.reloadData()
-                print(self.list)
             case .failure(let error):
                 print(error)
             }
@@ -90,10 +93,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell() }
         
-        cell.titleLabel.text = "\(list[indexPath.row].movieTitle): \(list[indexPath.row].releaseDate)"
+        cell.rankLabel.text = "\(list[indexPath.row].rank)"
+        cell.titleLabel.text = "제목: \(list[indexPath.row].movieTitle)"
         cell.titleLabel.font = .boldSystemFont(ofSize: 22)
-        
-        
+        cell.releaseDate.text = "개봉 날짜: \(list[indexPath.row].releaseDate)"
+        cell.totalCount.text = "관객수: \(list[indexPath.row].totalCount)"
         
         return cell
     }
@@ -103,7 +107,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(60)
+        return CGFloat(100)
     }
 
 }
