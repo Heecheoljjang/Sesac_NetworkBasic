@@ -52,7 +52,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         searchBar.delegate = self
         
-        requestBoxOffice(text: "20220701")
+        let format = DateFormatter()
+        format.dateFormat = "yyyyMMdd" // "yyyyMMdd" "YYYYMMdd" 둘은 차이있음.
+        let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date() ) // to가 기준점이 되는 시간
+        let dateResult = format.string(from: yesterday!)
+        
+        requestBoxOffice(text: dateResult)
     }
 
     func requestBoxOffice(text: String) {

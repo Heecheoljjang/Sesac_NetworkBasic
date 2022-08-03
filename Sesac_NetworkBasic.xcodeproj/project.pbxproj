@@ -31,7 +31,15 @@
 		9782959928935D4100BE2368 /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9782959828935D4100BE2368 /* LocationViewController.swift */; };
 		9782959C289384EF00BE2368 /* Cafe24SsurroundAir.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9782959B289384EF00BE2368 /* Cafe24SsurroundAir.ttf */; };
 		9782959E289384FA00BE2368 /* Cafe24Ohsquareair.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9782959D289384FA00BE2368 /* Cafe24Ohsquareair.ttf */; };
+		9795D36C289A475C003F2BA0 /* ImageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9795D36B289A475C003F2BA0 /* ImageModel.swift */; };
+		9795D36F289A485F003F2BA0 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9795D36D289A485F003F2BA0 /* ImageCollectionViewCell.swift */; };
+		9795D370289A485F003F2BA0 /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9795D36E289A485F003F2BA0 /* ImageCollectionViewCell.xib */; };
 		97E5A42A2898BD2700FFCB3D /* BoxOfficeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E5A4292898BD2700FFCB3D /* BoxOfficeModel.swift */; };
+		97E5A42C2899841600FFCB3D /* BeerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E5A42B2899841600FFCB3D /* BeerModel.swift */; };
+		97E5A42E28999FE900FFCB3D /* BeerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E5A42D28999FE900FFCB3D /* BeerListViewController.swift */; };
+		97E5A4312899A17100FFCB3D /* BeerListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E5A42F2899A17100FFCB3D /* BeerListTableViewCell.swift */; };
+		97E5A4322899A17100FFCB3D /* BeerListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97E5A4302899A17100FFCB3D /* BeerListTableViewCell.xib */; };
+		97E5A487289A095800FFCB3D /* ImageSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E5A486289A095800FFCB3D /* ImageSearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,7 +66,15 @@
 		9782959828935D4100BE2368 /* LocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		9782959B289384EF00BE2368 /* Cafe24SsurroundAir.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24SsurroundAir.ttf; sourceTree = "<group>"; };
 		9782959D289384FA00BE2368 /* Cafe24Ohsquareair.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Cafe24Ohsquareair.ttf; sourceTree = "<group>"; };
+		9795D36B289A475C003F2BA0 /* ImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageModel.swift; sourceTree = "<group>"; };
+		9795D36D289A485F003F2BA0 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		9795D36E289A485F003F2BA0 /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		97E5A4292898BD2700FFCB3D /* BoxOfficeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeModel.swift; sourceTree = "<group>"; };
+		97E5A42B2899841600FFCB3D /* BeerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerModel.swift; sourceTree = "<group>"; };
+		97E5A42D28999FE900FFCB3D /* BeerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListViewController.swift; sourceTree = "<group>"; };
+		97E5A42F2899A17100FFCB3D /* BeerListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListTableViewCell.swift; sourceTree = "<group>"; };
+		97E5A4302899A17100FFCB3D /* BeerListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BeerListTableViewCell.xib; sourceTree = "<group>"; };
+		97E5A486289A095800FFCB3D /* ImageSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +110,7 @@
 		975DBE712890DD76008F32FF /* Sesac_NetworkBasic */ = {
 			isa = PBXGroup;
 			children = (
+				9795D371289A4866003F2BA0 /* Image */,
 				976CAE4C2897577A00F3319B /* Constant */,
 				9782959A289383FA00BE2368 /* Resource */,
 				975DBE722890DD76008F32FF /* AppDelegate.swift */,
@@ -113,6 +130,8 @@
 				976CAE592897C13600F3319B /* Beer */,
 				976FA9C528920C9E00369AA2 /* Protocol */,
 				97E5A4292898BD2700FFCB3D /* BoxOfficeModel.swift */,
+				97E5A42B2899841600FFCB3D /* BeerModel.swift */,
+				9795D36B289A475C003F2BA0 /* ImageModel.swift */,
 			);
 			path = Sesac_NetworkBasic;
 			sourceTree = "<group>";
@@ -131,6 +150,9 @@
 			children = (
 				976CAE572897C12E00F3319B /* BeerViewController.swift */,
 				976CAE5A2897C14800F3319B /* Beer.storyboard */,
+				97E5A42D28999FE900FFCB3D /* BeerListViewController.swift */,
+				97E5A42F2899A17100FFCB3D /* BeerListTableViewCell.swift */,
+				97E5A4302899A17100FFCB3D /* BeerListTableViewCell.xib */,
 			);
 			path = Beer;
 			sourceTree = "<group>";
@@ -151,6 +173,16 @@
 				9782959B289384EF00BE2368 /* Cafe24SsurroundAir.ttf */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		9795D371289A4866003F2BA0 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				97E5A486289A095800FFCB3D /* ImageSearchViewController.swift */,
+				9795D36D289A485F003F2BA0 /* ImageCollectionViewCell.swift */,
+				9795D36E289A485F003F2BA0 /* ImageCollectionViewCell.xib */,
+			);
+			path = Image;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +260,8 @@
 				9782959C289384EF00BE2368 /* Cafe24SsurroundAir.ttf in Resources */,
 				975DBE7C2890DD77008F32FF /* Assets.xcassets in Resources */,
 				975DBE7A2890DD76008F32FF /* Main.storyboard in Resources */,
+				9795D370289A485F003F2BA0 /* ImageCollectionViewCell.xib in Resources */,
+				97E5A4322899A17100FFCB3D /* BeerListTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,17 +275,23 @@
 				976FA9CA28920ECA00369AA2 /* ViewController.swift in Sources */,
 				976CAE5028975FB400F3319B /* UserDefaultsHelper.swift in Sources */,
 				976CAE582897C12E00F3319B /* BeerViewController.swift in Sources */,
+				9795D36F289A485F003F2BA0 /* ImageCollectionViewCell.swift in Sources */,
 				97E5A42A2898BD2700FFCB3D /* BoxOfficeModel.swift in Sources */,
 				976FA9D028923AC600369AA2 /* WebViewController.swift in Sources */,
 				975DBE872890E1F4008F32FF /* SearchViewController.swift in Sources */,
 				975DBE8A2890E4C9008F32FF /* ListTableViewCell.swift in Sources */,
 				976FA9CC2892236500369AA2 /* LottoViewController.swift in Sources */,
 				9782959928935D4100BE2368 /* LocationViewController.swift in Sources */,
+				97E5A42E28999FE900FFCB3D /* BeerListViewController.swift in Sources */,
+				97E5A42C2899841600FFCB3D /* BeerModel.swift in Sources */,
+				9795D36C289A475C003F2BA0 /* ImageModel.swift in Sources */,
+				97E5A4312899A17100FFCB3D /* BeerListTableViewCell.swift in Sources */,
 				976FA9C828920CCF00369AA2 /* ViewPresentableProtocol.swift in Sources */,
 				976FA9CE2892305100369AA2 /* TranslateViewController.swift in Sources */,
 				975DBE732890DD76008F32FF /* AppDelegate.swift in Sources */,
 				976CAE4B2897527E00F3319B /* ReusableViewProtocol.swift in Sources */,
 				975DBE752890DD76008F32FF /* SceneDelegate.swift in Sources */,
+				97E5A487289A095800FFCB3D /* ImageSearchViewController.swift in Sources */,
 				976CAE4E2897579B00F3319B /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
