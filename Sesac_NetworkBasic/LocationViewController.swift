@@ -11,6 +11,7 @@ class LocationViewController: UIViewController {
     
 
     @IBOutlet weak var notiBtn: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
     
     // Notification 1
     let notificationCenter = UNUserNotificationCenter.current()
@@ -27,6 +28,23 @@ class LocationViewController: UIViewController {
     @IBAction func notificationBtnClicked(_ sender: UIButton) {
 
         self.sendNotification()
+    }
+    @IBAction func downloadImage(_ sender: UIButton) {
+        
+        //이미지 로드하는동안 안움직임
+        let url = "https://apod.nasa.gov/apod/image/2208/M13_final2_sinfirma.jpg"
+        print("1", Thread.isMainThread)
+        
+        //동시에 여러 작업이 가능하게해줌.
+        DispatchQueue.global().async {
+            print("2", Thread.isMainThread)
+            let data = try! Data(contentsOf: URL(string: url)!)
+            let image = UIImage(data: data)
+            DispatchQueue.main.async {
+                print("3", Thread.isMainThread)
+                self.imageView.image = image
+            }
+        }
     }
     
     // Notifiation 2. 권한요청

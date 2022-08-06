@@ -18,11 +18,16 @@ class LottoViewController: UIViewController {
     @IBOutlet weak var bonusNumLabel: UILabel!
     
     var lottoPickerView = UIPickerView()
+    let startDate = "2002-12-07"
     
-    let numberList: [Int]  = Array(1...1026).reversed()
+    var numberList: [Int] = []
+    var latest = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        latest = getLatestDrw()
+        numberList = Array(1...latest).reversed()
 
         numberTextField.textContentType = .oneTimeCode
         
@@ -32,13 +37,18 @@ class LottoViewController: UIViewController {
         //커서 안보이게하면 버튼처럼 사용할 수 있음.
         numberTextField.tintColor = .clear
         
+        //비워두기
+        for label in numberLabel {
+            label.text = ""
+        }
+        bonusNumLabel.text = ""
         
         lottoPickerView.dataSource = self
         lottoPickerView.delegate = self
         numberTextField.delegate = self
         
         // 처음에는 가장 최근 회차의 번호를 띄움
-        requestLotto(number: 1026)
+        requestLotto(number: latest)
         
     }
     
@@ -88,6 +98,18 @@ extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
                 print(error)
             }
         }
+    }
+    
+    func getLatestDrw() -> Int {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let startDate = dateFormatter.date(from: startDate)
+        let today = dateFormatter.date(from: dateFormatter.string(from: Date()))
+        
+        let interval = Int(today!.timeIntervalSince(startDate!)) / 86400
+        let latest = interval / 7
+        
+        return latest
     }
 }
 extension LottoViewController: UITextFieldDelegate {
