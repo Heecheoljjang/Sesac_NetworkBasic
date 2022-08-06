@@ -17,17 +17,20 @@ class LottoViewController: UIViewController {
     @IBOutlet var numberLabel: [UILabel]!
     @IBOutlet weak var bonusNumLabel: UILabel!
     
+    let userDefaults = UserDefaults.standard
+    
     var lottoPickerView = UIPickerView()
     let startDate = "2002-12-07"
     
-    var numberList: [Int] = []
+    var numberList: [String] = []
     var latest = 1
+    var roundArr: [Int] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         latest = getLatestDrw()
-        numberList = Array(1...latest).reversed()
+        roundArr = Array(1...latest).reversed()
 
         numberTextField.textContentType = .oneTimeCode
         
@@ -62,13 +65,13 @@ extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return numberList.count
+        return roundArr.count
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        requestLotto(number: numberList[row])
+        requestLotto(number: roundArr[row])
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(numberList[row])회차"
+        return "\(roundArr[row])회차"
     }
     func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
         return CGFloat(200)
@@ -78,24 +81,50 @@ extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
 
     func requestLotto(number: Int) {
-    
-        let url = "\(EndPoint.lottoURL)&drwNo=\(number)"
-        AF.request(url, method: .get).validate().responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                print(json)
-                for i in 0...5 {
-                    self.numberLabel[i].text = json["drwtNo\(i+1)"].stringValue
+        
+        if userDefaults.array(forKey: "\(number)") != nil {
+            print("이미있듬")
+            print("\(userDefaults.array(forKey: "\(number)"))")
+            numberList = userDefaults.array(forKey: "\(number)") as! [String]
+            print(numberList)
+            DispatchQueue.main.async {
+                for i in 0..<self.numberLabel.count {
+                    self.numberLabel[i].text = "\(self.numberList[i])"
                 }
-                self.bonusNumLabel.text = json["bnusNo"].stringValue 
-                
-                let date = json["drwNoDate"].stringValue
-                let round = json["drwNo"].intValue
-                
-                self.numberTextField.text = date + ", \(round)회차"
-            case .failure(let error):
-                print(error)
+                self.bonusNumLabel.text = "\(self.numberList[6])"
+//                self.numberTextField.text = date + ", \(round)회차"
+                self.numberTextField.text = self.numberList[7] + ", \(self.numberList[8])회차"
+            }
+        } else {
+            print("없음")
+            var tempArr: [String] = []
+            let url = "\(EndPoint.lottoURL)&drwNo=\(number)"
+            AF.request(url, method: .get).validate().responseJSON(queue: .global()) { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    print(json)
+                    DispatchQueue.main.async {
+                        for i in 0...5 {
+                            self.numberLabel[i].text = json["drwtNo\(i+1)"].stringValue
+                            tempArr.append(json["drwtNo\(i+1)"].stringValue)
+                            print(tempArr)
+                        }
+                        self.bonusNumLabel.text = json["bnusNo"].stringValue
+                        tempArr.append(json["bnusNo"].stringValue)
+                        
+                        let date = json["drwNoDate"].stringValue
+                        tempArr.append(json["drwNoDate"].stringValue)
+                        let round = json["drwNo"].intValue
+                        tempArr.append(json["drwNo"].stringValue)
+                        
+                        self.numberTextField.text = date + ", \(round)회차"
+                        self.userDefaults.set(tempArr, forKey: "\(number)")
+                        print("123", self.userDefaults.array(forKey: "\(number)"))
+                    }
+                case .failure(let error):
+                    print(error)
+                }
             }
         }
     }
