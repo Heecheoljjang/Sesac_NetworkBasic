@@ -120,7 +120,6 @@ extension LottoViewController: UIPickerViewDelegate, UIPickerViewDataSource {
                         
                         self.numberTextField.text = date + ", \(round)회차"
                         self.userDefaults.set(tempArr, forKey: "\(number)")
-                        print("123", self.userDefaults.array(forKey: "\(number)"))
                     }
                 case .failure(let error):
                     print(error)
