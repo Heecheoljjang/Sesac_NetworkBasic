@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import JGProgressHUD
+import RealmSwift
 
 /*
  Swift Protocol
@@ -42,6 +43,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     let hud = JGProgressHUD()
     
+    let localRealm = try! Realm()
+    
+    var tasks: MovieData?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,60 +64,87 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         format.dateFormat = "yyyyMMdd" // "yyyyMMdd" "YYYYMMdd" 둘은 차이있음.
         let yesterday = Calendar.current.date(byAdding: .day, value: -1, to: Date() ) // to가 기준점이 되는 시간
         let dateResult = format.string(from: yesterday!)
-        
         requestBoxOffice(text: dateResult)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        searchTableView.reloadData()
     }
 
     func requestBoxOffice(text: String) {
         
-        hud.textLabel.text = "Loading"
-        hud.show(in: view)
         
         list.removeAll()
     
-        let url = "\(EndPoint.boxOfficeURL)key=\(APIKey.BOXOFFICE)&targetDt=\(text)"
-        
-        AF.request(url, method: .get).validate().responseData { response in
-            switch response.result {
-            case .success(let value):
-                let json = JSON(value)
-                print(json)
-                
-                for movie in json["boxOfficeResult"]["dailyBoxOfficeList"].arrayValue {
-                    let movieNm = movie["movieNm"].stringValue
-                    let openDt = movie["openDt"].stringValue
-                    let audiAcc = movie["audiAcc"].stringValue
-                    let rank = movie["rank"].stringValue
+        if localRealm.object(ofType: MovieData.self, forPrimaryKey: text) != nil {
+            tasks = localRealm.object(ofType: MovieData.self, forPrimaryKey: text)
+            searchTableView.reloadData()
+        } else {
+            hud.textLabel.text = "Loading"
+            hud.show(in: view)
+            
+            let url = "\(EndPoint.boxOfficeURL)key=\(APIKey.BOXOFFICE)&targetDt=\(text)"
+            
+            AF.request(url, method: .get).validate().responseData { response in
+                switch response.result {
+                case .success(let value):
+                    let json = JSON(value)
+                    //print(json)
+                    
+                    let movieData = List<Movie>()
+                    for movie in json["boxOfficeResult"]["dailyBoxOfficeList"].arrayValue {
+                        let movieNm = movie["movieNm"].stringValue
+                        let openDt = movie["openDt"].stringValue
+                        let audiAcc = movie["audiAcc"].stringValue
+                        let rank = movie["rank"].stringValue
 
-                    let data = BoxOfficeModel(movieTitle: movieNm, releaseDate: openDt, totalCount: audiAcc, rank: rank)
+                        let data = Movie(rank: rank, movieTitle: movieNm, releaseDate: openDt, totalCount: audiAcc)
+                        movieData.append(data)
+                    }
+                    let task = MovieData(boxofficeList: movieData, objectId: text)
 
+                    try! self.localRealm.write {
+                        self.localRealm.add(task) //실질적으로 create
+                        self.tasks = self.localRealm.object(ofType: MovieData.self, forPrimaryKey: text)
+                        print(self.tasks)
+                        self.searchTableView.reloadData()
+                        print(self.localRealm.configuration.fileURL!)
+                    }
 
-                    self.list.append(data)
+                    //self.searchTableView.reloadData()
+                    self.hud.dismiss()
+                    
+                case .failure(let error):
+                    print(error)
+                    self.hud.dismiss()
+                    
+                    //시뮬레이터 실패 테스트 -> 맥의 환경 따라감
+                    
                 }
-
-                self.searchTableView.reloadData()
-                self.hud.dismiss()
-            case .failure(let error):
-                print(error)
-                self.hud.dismiss()
-                
-                //시뮬레이터 실패 테스트 -> 맥의 환경 따라감
-                
             }
         }
+        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return list.count
+        guard let tasks = tasks else {
+            return 10
+        }
+
+        return tasks.boxofficeList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as? ListTableViewCell else { return UITableViewCell() }
+        guard let tasks = tasks else { return UITableViewCell() }
+
         
-        cell.rankLabel.text = "\(list[indexPath.row].rank)"
-        cell.titleLabel.text = "제목: \(list[indexPath.row].movieTitle)"
+        cell.rankLabel.text = tasks.boxofficeList[indexPath.row].rank
+        cell.titleLabel.text = tasks.boxofficeList[indexPath.row].movieTitle
         cell.titleLabel.font = .boldSystemFont(ofSize: 22)
-        cell.releaseDate.text = "개봉 날짜: \(list[indexPath.row].releaseDate)"
-        cell.totalCount.text = "관객수: \(list[indexPath.row].totalCount)"
+        cell.releaseDate.text = tasks.boxofficeList[indexPath.row].releaseDate
+        cell.totalCount.text = tasks.boxofficeList[indexPath.row].totalCount
         
         return cell
     }
@@ -124,11 +156,13 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(100)
     }
-
+    
 }
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        requestBoxOffice(text: searchBar.text!) // 옵셔널 바인딩, 8글자, 숫자, 날짜로 변경 시 유효한 형태의 값인지 등
+        if let text = searchBar.text {
+            requestBoxOffice(text: text)
+        }
     }
 }

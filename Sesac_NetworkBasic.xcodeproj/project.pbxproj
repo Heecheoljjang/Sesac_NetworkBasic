@@ -35,6 +35,9 @@
 		9795D36F289A485F003F2BA0 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9795D36D289A485F003F2BA0 /* ImageCollectionViewCell.swift */; };
 		9795D370289A485F003F2BA0 /* ImageCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9795D36E289A485F003F2BA0 /* ImageCollectionViewCell.xib */; };
 		979AA3CE289CB3F4009378EC /* ImageSearchAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 979AA3CD289CB3F4009378EC /* ImageSearchAPIManager.swift */; };
+		97A1928F28B3A3160053E452 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 97A1928E28B3A3160053E452 /* Realm */; };
+		97A1929128B3A3160053E452 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 97A1929028B3A3160053E452 /* RealmSwift */; };
+		97A1929328B3A4F50053E452 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A1929228B3A4F50053E452 /* RealmModel.swift */; };
 		97E5A42A2898BD2700FFCB3D /* BoxOfficeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E5A4292898BD2700FFCB3D /* BoxOfficeModel.swift */; };
 		97E5A42C2899841600FFCB3D /* BeerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E5A42B2899841600FFCB3D /* BeerModel.swift */; };
 		97E5A42E28999FE900FFCB3D /* BeerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E5A42D28999FE900FFCB3D /* BeerListViewController.swift */; };
@@ -72,6 +75,7 @@
 		9795D36D289A485F003F2BA0 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		9795D36E289A485F003F2BA0 /* ImageCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImageCollectionViewCell.xib; sourceTree = "<group>"; };
 		979AA3CD289CB3F4009378EC /* ImageSearchAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSearchAPIManager.swift; sourceTree = "<group>"; };
+		97A1929228B3A4F50053E452 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		97E5A4292898BD2700FFCB3D /* BoxOfficeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeModel.swift; sourceTree = "<group>"; };
 		97E5A42B2899841600FFCB3D /* BeerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerModel.swift; sourceTree = "<group>"; };
 		97E5A42D28999FE900FFCB3D /* BeerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeerListViewController.swift; sourceTree = "<group>"; };
@@ -85,10 +89,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97A1929128B3A3160053E452 /* RealmSwift in Frameworks */,
 				97ECF172289B4F9400A550F5 /* JGProgressHUD in Frameworks */,
 				976CAE5E2897CBAC00F3319B /* Kingfisher in Frameworks */,
 				976CAE5628977CFF00F3319B /* SwiftyJSON in Frameworks */,
 				976CAE5328977CDC00F3319B /* Alamofire in Frameworks */,
+				97A1928F28B3A3160053E452 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,6 +137,7 @@
 				975DBE892890E4C9008F32FF /* ListTableViewCell.xib */,
 				975DBE882890E4C9008F32FF /* ListTableViewCell.swift */,
 				975DBE862890E1F4008F32FF /* SearchViewController.swift */,
+				97A1929228B3A4F50053E452 /* RealmModel.swift */,
 				976FA9C928920ECA00369AA2 /* ViewController.swift */,
 				976CAE592897C13600F3319B /* Beer */,
 				976FA9C528920C9E00369AA2 /* Protocol */,
@@ -219,6 +226,8 @@
 				976CAE5528977CFF00F3319B /* SwiftyJSON */,
 				976CAE5D2897CBAC00F3319B /* Kingfisher */,
 				97ECF171289B4F9400A550F5 /* JGProgressHUD */,
+				97A1928E28B3A3160053E452 /* Realm */,
+				97A1929028B3A3160053E452 /* RealmSwift */,
 			);
 			productName = Sesac_NetworkBasic;
 			productReference = 975DBE6F2890DD76008F32FF /* Sesac_NetworkBasic.app */;
@@ -253,6 +262,7 @@
 				976CAE5428977CFF00F3319B /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 				976CAE5C2897CBAC00F3319B /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				97ECF170289B4F9400A550F5 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
+				97A1928D28B3A3160053E452 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 975DBE702890DD76008F32FF /* Products */;
 			projectDirPath = "";
@@ -309,6 +319,7 @@
 				97E5A487289A095800FFCB3D /* ImageSearchViewController.swift in Sources */,
 				979AA3CE289CB3F4009378EC /* ImageSearchAPIManager.swift in Sources */,
 				976CAE4E2897579B00F3319B /* Constant.swift in Sources */,
+				97A1929328B3A4F50053E452 /* RealmModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +563,14 @@
 				minimumVersion = 7.0.0;
 			};
 		};
+		97A1928D28B3A3160053E452 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 		97ECF170289B4F9400A550F5 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
@@ -577,6 +596,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 976CAE5C2897CBAC00F3319B /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		97A1928E28B3A3160053E452 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97A1928D28B3A3160053E452 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		97A1929028B3A3160053E452 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97A1928D28B3A3160053E452 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		97ECF171289B4F9400A550F5 /* JGProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
